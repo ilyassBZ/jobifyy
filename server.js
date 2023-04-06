@@ -5,8 +5,6 @@ dotenv.config();
 import "express-async-errors";
 import morgan from "morgan";
 
-
-
 import helmet from "helmet";
 import xss from "xss-clean";
 import mongoSanitize from "express-mongo-sanitize";
@@ -40,7 +38,7 @@ app.use(helmet()); // secure Express-app by setting various HTTP headers
 app.use(xss()); // node-Connect-middleware to sanitize user input coming from POST body, GET queries, and url params
 app.use(mongoSanitize()); // Sanitizes user-supplied data to prevent MongoDB Operator Injection
 
-app.get("/api/v1", (req, res) => {
+app.get("/", (req, res) => {
   res.json("Welcome!");
 });
 app.use("/api/v1/auth", authRouter);
@@ -59,9 +57,7 @@ const start = async () => {
     await connectDB(process.env.MONGO_URL);
 
     // only connect to server if successfully-connected to DB
-    app.listen(port, () =>
-      console.log(`Server is listening to :${port}`)
-    );
+    app.listen(port, () => console.log(`Server is listening to :${port}`));
   } catch (error) {
     console.log(error);
   }

@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 dotenv.config();
 import "express-async-errors";
 import morgan from "morgan";
+import cors from "cors";
 
 import helmet from "helmet";
 import xss from "xss-clean";
@@ -26,6 +27,7 @@ import { fileURLToPath } from "url";
 import path from "path";
 
 const __dirname = dirname(fileURLToPath(import.meta.url)); // because we're using ES6-modules not common.js
+app.use(cors());
 
 app.use(express.static(path.resolve(__dirname, "./client/build"))); // static assets
 
